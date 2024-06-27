@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { EditExpenseProps } from "../../types/expenseTypes";
-import { expenseDeleteApi } from "../../api/expenseapicalls";
+
+import { useAppDispatch } from "../../redux/hooks/storehooks";
+import { deleteExpense } from "../../redux/actions/expenseactions";
 
 const DeleteExpense: React.FC<EditExpenseProps> = ({
   expense,
@@ -8,27 +10,40 @@ const DeleteExpense: React.FC<EditExpenseProps> = ({
   triggerapi,
   setTriggerapi,
 }) => {
-  const localstorage_data = JSON.parse(localStorage.getItem("data") as string);
+  const dispatch = useAppDispatch()
   const [loading, setLoading] = useState(false);
 
   const handleNo = () => {
     setModal((prev) => ({ ...prev, delete: false }));
   };
 
+  // const handleYes = async () => {
+  //   try {
+  //     setLoading(true);
+  //     const response = await expenseDeleteApi(
+  //       expense?._id,
+  //       localstorage_data?.token
+  //     );
+  //     // setList((prev)=>({...prev,results:prev?.results?.filter((ele)=>ele?._id !== expense?._id)}))
+  //     // setList((prev)=>({...prev,results:response?.filter((ele)=>ele?._id !== expense?._id)}))
+  //     setTriggerapi(!triggerapi);
+  //     setLoading(false);
+  //     setModal((prev) => ({ ...prev, delete: false }));
+  //   } catch (error) {
+  //     console.log(error, "error");
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleYes = async () => {
+    setLoading(true);
     try {
-      setLoading(true);
-      const response = await expenseDeleteApi(
-        expense?._id,
-        localstorage_data?.token
-      );
-      // setList((prev)=>({...prev,results:prev?.results?.filter((ele)=>ele?._id !== expense?._id)}))
-      // setList((prev)=>({...prev,results:response?.filter((ele)=>ele?._id !== expense?._id)}))
-      setTriggerapi(!triggerapi);
-      setLoading(false);
-      setModal((prev) => ({ ...prev, delete: false }));
+      await dispatch(deleteExpense(expense?._id));
+      setModal((prev) => ({ ...prev, delete: false })); // Close the modal
+      setTriggerapi(!triggerapi); // Trigger the fetch action
     } catch (error) {
-      console.log(error, "error");
+      console.error("Failed to add expense:", error);
+    } finally {
       setLoading(false);
     }
   };

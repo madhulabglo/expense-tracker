@@ -13,7 +13,7 @@ import OnlyExpensDelete from "./onlyexpensedelete";
 import { useNavigate } from "react-router-dom";
 import { fetchRoomMatesWithoutPagination } from "../../redux/actions/roommatesactions";
 
-interface DateRange {
+ interface DateRange {
   fromdate: string;
   todate: string;
 }
@@ -42,7 +42,7 @@ const Expenselist: React.FC = () => {
   const [page, setPage] = useState({ page: 1, limit: 5 });
   const [date, setDate] = useState<DateRange>({ fromdate: "", todate: "" });
   const [triggerapi, setTriggerapi] = useState(false);
-  const [roommate,setRoommate] = useState<Roommate[]>([])
+  const [roommate, setRoommate] = useState<Roommate[]>([]);
 
   useEffect(() => {
     const today = new Date();
@@ -96,41 +96,55 @@ const Expenselist: React.FC = () => {
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setDate((prev) => ({ ...prev, [name]: value }));
+    setPage((prev) => ({ ...prev, page: 1 }));
   };
   const handleCalender = () => {
     navigate("/calculation");
   };
 
-  useEffect(() => {
-    dispatch(
-      fetchOnlyExpenseWithPagination(
-        page?.page,
-        page?.limit,
-        date?.fromdate,
-        date?.todate
-      )
-    );
-  }, [dispatch, page?.page, page?.limit, date?.todate, triggerapi]);
+  useEffect(
+    () => {
+      dispatch(
+        fetchOnlyExpenseWithPagination(
+          page?.page,
+          page?.limit,
+          date?.fromdate,
+          date?.todate
+        )
+      );
+    }, // eslint-disable-next-line
+    [dispatch, page?.page, page?.limit, date?.todate, triggerapi]
+  );
 
-  useEffect(() => {
-    if (date.fromdate && date.todate === "") {
-      setDate((prev) => ({ ...prev, todate: date.fromdate }));
-    }
-  }, [date.fromdate]);
+  useEffect(
+    () => {
+      if (date.fromdate && date.todate === "") {
+        setDate((prev) => ({ ...prev, todate: date.fromdate }));
+      }
+    }, // eslint-disable-next-line
+    [date.fromdate]
+  );
 
-  useEffect(() => {
-    dispatch(fetchRoomMatesWithoutPagination());
-  }, []);
+  useEffect(
+    () => {
+      dispatch(fetchRoomMatesWithoutPagination());
+    }, // eslint-disable-next-line
+    []
+  );
 
-  useEffect(()=>{
-    if(roommates?.results){
-      setRoommate([{name:"Select Roommate",_id:"default"},...roommates?.results])
-    }
- 
-  },[roommates])
+  useEffect(
+    () => {
+      if (roommates?.results) {
+        setRoommate([
+          { name: "Select Roommate", _id: "default" },
+          ...roommates?.results,
+        ]);
+      }
+    }, // eslint-disable-next-line
+    [roommates]
+  );
 
-  console.log(roommate,roommates,"rommmmmmmm");
-  
+  console.log(roommate, roommates, "rommmmmmmm");
 
   const formatDateString = (dateString: string): string => {
     const date = new Date(dateString);

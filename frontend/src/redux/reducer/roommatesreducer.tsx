@@ -142,7 +142,7 @@ export const roomMatesPatchReducer = (
 };
 
 interface SuccessData {
-  message?: string;
+  success?: string;
   // Add any other properties that logindata might have
 }
 

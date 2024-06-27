@@ -64,6 +64,15 @@
 // types.ts
 import React from 'react';
 
+
+export interface ExpenseFormData {
+  date: string;
+  category: string;
+  description: string;
+  amount: string;
+  is_expense: boolean;
+
+}
 export interface Expense {
   date: string;
   category: string;

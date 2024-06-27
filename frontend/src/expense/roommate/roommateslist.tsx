@@ -12,7 +12,7 @@ import "../../style/allhistory.css";
 import Modal from "../../commoncomponents/modal";
 
 const RoomMates: React.FC = () => {
-  const localstorage_data = JSON.parse(localStorage.getItem("data") as string);
+  // const localstorage_data = JSON.parse(localStorage.getItem("data") as string);
 
   const room_mates_data = useAppSelector((state) => state.roomMatesPagination);
   // const loading = useAppSelector((state) => state.allexpense.loading);

@@ -13,13 +13,24 @@ import {
   FETCH_PAGINATION_EXPENSE_REQUEST,
   FETCH_PAGINATION_EXPENSE_SUCCESS,
   FETCH_PAGINATION_EXPENSE_FAILURE,
+  FETCH_EXPENSE_POST_REQUEST,
+  FETCH_EXPENSE_POST_SUCCESS,
+  FETCH_EXPENSE_POST_FAILURE,
+  FETCH_EXPENSE_PATCH_REQUEST,
+  FETCH_EXPENSE_PATCH_SUCCESS,
+  FETCH_EXPENSE_PATCH_FAILURE,
+  FETCH_EXPENSE_DELETE_REQUEST,
+  FETCH_EXPENSE_DELETE_SUCCESS,
+  FETCH_EXPENSE_DELETE_FAILURE
 } from "../constant/expenseconstant";
 import { HTTP } from "../../api/baseurl";
 import {
   ExpenseResponse,
   ExpenseResponseWithoutPagination,
+  ExpenseFormData,
+  Expense,
 } from "../../types/expenseTypes";
-// const baseURL = "http://127.0.0.1:4000";
+
 
 const localstorage_data = JSON.parse(localStorage.getItem("data") as string);
 
@@ -112,6 +123,126 @@ export const fetchExpenseWithPagination = (
     }
   };
 };
+
+export const expnesPostRequest = () => ({
+  type: FETCH_EXPENSE_POST_REQUEST,
+});
+
+export const expensePostSuccess = (expensedata:Expense ) => ({
+  type: FETCH_EXPENSE_POST_SUCCESS,
+  payload: expensedata,
+});
+
+export const expensePostFailure = (error: string) => ({
+  type: FETCH_EXPENSE_POST_FAILURE,
+  payload: error,
+});
+
+export const postExpense = (expensedata: ExpenseFormData) => {
+  return async (dispatch: Dispatch) => {
+    dispatch(expnesPostRequest());
+
+    try {
+      const token = localstorage_data?.token;
+      const response = await fetch(`${HTTP}/addexpense`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(expensedata),
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const allexpense = await response.json();
+      dispatch(expensePostSuccess(allexpense));
+    } catch (error) {
+      // Type assertion to specify that error is an instance of Error
+      dispatch(expensePostFailure((error as Error).message));
+    }
+  };
+};
+
+export const expnesPatchRequest = () => ({
+  type: FETCH_EXPENSE_PATCH_REQUEST,
+});
+
+export const expensePatchSuccess = (expensedata: Expense) => ({
+  type: FETCH_EXPENSE_PATCH_SUCCESS,
+  payload: expensedata,
+});
+
+export const onlyExpensePatchFailure = (error: string) => ({
+  type:FETCH_EXPENSE_PATCH_FAILURE,
+  payload: error,
+});
+
+export const patchExpense = (expensedata: Expense, id: string) => {
+  return async (dispatch: Dispatch) => {
+    dispatch(expnesPatchRequest());
+
+    try {
+      const token = localstorage_data?.token;
+      const response = await fetch(`${HTTP}/updateexpense/${id}/`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(expensedata),
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const allexpense = await response.json();
+      dispatch(expensePatchSuccess(allexpense));
+    } catch (error) {
+      // Type assertion to specify that error is an instance of Error
+      dispatch(onlyExpensePatchFailure((error as Error).message));
+    }
+  };
+};
+
+export const expnesDeleteRequest = () => ({
+  type: FETCH_EXPENSE_DELETE_REQUEST,
+});
+
+export const expenseDeleteSuccess = (expensedata: Expense) => ({
+  type: FETCH_EXPENSE_DELETE_SUCCESS,
+  payload: expensedata,
+});
+
+export const expenseDeleteFailure = (error: string) => ({
+  type: FETCH_EXPENSE_DELETE_FAILURE,
+  payload: error,
+});
+
+export const deleteExpense = (id: string) => {
+  return async (dispatch: Dispatch) => {
+    dispatch(expnesDeleteRequest());
+
+    try {
+      const token = localstorage_data?.token;
+      const response = await fetch(`${HTTP}/deleteexpense/${id}/`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const allexpense = await response.json();
+      dispatch(expenseDeleteSuccess(allexpense));
+    } catch (error) {
+      // Type assertion to specify that error is an instance of Error
+      dispatch(expenseDeleteFailure((error as Error).message));
+    }
+  };
+};
+
 
 export const postEmailRequest = () => ({
   type: POST_EMAIL_REQUEST,

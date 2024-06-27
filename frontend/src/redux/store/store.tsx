@@ -1,7 +1,7 @@
 // src/store/store.ts
 import { configureStore } from '@reduxjs/toolkit';
 import {thunk} from "redux-thunk"
-import { expensePaginationReducer, expenseReducer, loginReducer, otpReducer } from '../reducer/expensereducer';
+import { expenseDeleteReducer, expensePaginationReducer, expensePatchReducer, expensePostReducer, expenseReducer, loginReducer, otpReducer } from '../reducer/expensereducer';
 import { onlyExpenseDeleteReducer, onlyExpensePatchReducer, onlyExpensePostReducer, onlyexpensePaginationReducer, onlyexpenseReducer } from '../reducer/onlyexpensereducer';
 import { roomMatesDeleteReducer, roomMatesPaginationReducer, roomMatesPatchReducer, roomMatesPostReducer, roomMatesReducer } from '../reducer/roommatesreducer';
 import { calculationReducer } from '../reducer/calculationreducer';
@@ -12,6 +12,9 @@ export const store = configureStore({
     otp:otpReducer,
     expense: expenseReducer,
     expensePagination :expensePaginationReducer,
+    expensePost :expensePostReducer,
+    expensePatch :expensePatchReducer,
+    expenseDelete:expenseDeleteReducer,
     onlyexpense : onlyexpenseReducer,
     onlyexpensePagination : onlyexpensePaginationReducer,
     onlyexpensePost : onlyExpensePostReducer,

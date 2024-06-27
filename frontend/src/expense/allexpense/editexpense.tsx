@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Expense, EditExpenseProps } from "../../types/expenseTypes";
-import { expenseUpdateApi } from "../../api/expenseapicalls";
+import { useAppDispatch } from "../../redux/hooks/storehooks";
+import { patchExpense } from "../../redux/actions/expenseactions";
 
 const EditExpense: React.FC<EditExpenseProps> = ({
   expense,
@@ -10,7 +11,7 @@ const EditExpense: React.FC<EditExpenseProps> = ({
   triggerapi,
   setTriggerapi,
 }) => {
-  const localstorage_data = JSON.parse(localStorage.getItem("data") as string);
+  const dispatch = useAppDispatch()
   const [editExpense, setEditExpense] = useState<Expense>(expense);
   const [loading, setLoading] = useState(false);
 
@@ -27,22 +28,36 @@ const EditExpense: React.FC<EditExpenseProps> = ({
     }));
   };
 
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   try {
+  //     setLoading(true);
+  //     const response = await expenseUpdateApi(
+  //       expense?._id,
+  //       editExpense,
+  //       localstorage_data?.token
+  //     );
+  //     // setList((prev)=>({...prev,results:prev?.results?.map((ele)=>ele?._id === response?.data?._id ? response?.data : ele)}))
+  //     // setList(list?.results?.map((ele)=>ele?._id === response?.data?._id ?response?.data :ele))
+  //     setTriggerapi(!triggerapi);
+  //     setLoading(false);
+  //     setModal((prev) => ({ ...prev, edit: false }));
+  //   } catch (error) {
+  //     console.log(error, "error");
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      setLoading(true);
-      const response = await expenseUpdateApi(
-        expense?._id,
-        editExpense,
-        localstorage_data?.token
-      );
-      // setList((prev)=>({...prev,results:prev?.results?.map((ele)=>ele?._id === response?.data?._id ? response?.data : ele)}))
-      // setList(list?.results?.map((ele)=>ele?._id === response?.data?._id ?response?.data :ele))
-      setTriggerapi(!triggerapi);
-      setLoading(false);
-      setModal((prev) => ({ ...prev, edit: false }));
+      await dispatch(patchExpense(editExpense, expense?._id));
+      setModal((prev) => ({ ...prev, edit: false })); // Close the modal
+      setTriggerapi(!triggerapi); // Trigger the fetch action
     } catch (error) {
-      console.log(error, "error");
+      console.error("Failed to add expense:", error);
+    } finally {
       setLoading(false);
     }
   };

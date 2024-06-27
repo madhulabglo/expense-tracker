@@ -2,6 +2,7 @@ import { Dispatch } from "redux";
 import {
   RoomMates,
   onlyRoomMates,
+  roomMatesPostResponse,
   roomMatesResponseWithPagination,
   roomMatesResponseWithoutPagination,
 } from "../../types/roommatesTypes";
@@ -121,7 +122,7 @@ export const roomMatesPostRequest = () => ({
   type: ROOM_MATES_POST_REQUEST,
 });
 
-export const roomMatesPostSuccess = (roomMateData: onlyRoomMates) => ({
+export const roomMatesPostSuccess = (roomMateData: roomMatesPostResponse) => ({
   type: ROOM_MATES_POST_SUCCESS,
   payload: roomMateData,
 });
@@ -136,7 +137,7 @@ export const postRoomMates = (roomMateData: RoomMates) => {
     dispatch(roomMatesPostRequest());
 
     try {
-      const token = localstorage_data?.token;
+      const token =  localstorage_data?.token;
       const response = await fetch(`${HTTP}/addroommate`, {
         method: "POST",
         headers: {
@@ -148,14 +149,18 @@ export const postRoomMates = (roomMateData: RoomMates) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      const allexpense = await response.json();
+      const allexpense: roomMatesPostResponse = await response.json();
       dispatch(roomMatesPostSuccess(allexpense));
+      console.log(allexpense,"rommm api");
+      
+      return allexpense; // Ensure the response data is returned
     } catch (error) {
-      // Type assertion to specify that error is an instance of Error
       dispatch(roomMatesPostFailure((error as Error).message));
+      throw error; // Re-throw the error to handle it in the component
     }
   };
 };
+
 
 export const roomMatesPatchRequest = () => ({
   type: ROOM_MATES_PATCH_REQUEST,
@@ -190,6 +195,7 @@ export const patchRoomMates = (roomMatesData: onlyRoomMates, id: string) => {
       }
       const allexpense = await response.json();
       dispatch(roomMatesPatchSuccess(allexpense));
+      return allexpense;
     } catch (error) {
       // Type assertion to specify that error is an instance of Error
       dispatch(roomMatesPatchFailure((error as Error).message));
@@ -229,6 +235,7 @@ export const deleteRoomMates = (id: string) => {
       }
       const allexpense = await response.json();
       dispatch(roomMatesDeleteSuccess(allexpense));
+      return allexpense
     } catch (error) {
       // Type assertion to specify that error is an instance of Error
       dispatch(roomMatesDeleteFailure((error as Error).message));
