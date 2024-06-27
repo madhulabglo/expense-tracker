@@ -129,7 +129,8 @@ const Login: React.FC = () => {
     if (logindata?.message) {
       navigate("/verify-otp");
     }
-  }, [logindata]);
+  },// eslint-disable-next-line  
+  [logindata]);
   return (
     <div className="login-container">
       <div className="login-card">

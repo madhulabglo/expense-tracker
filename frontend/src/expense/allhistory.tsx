@@ -6,7 +6,6 @@
 // import EditExpense from "./editexpense";
 
 // import "../style/allhistory.css";
-// import { expenseGetApi } from "../api/expenseapicalls";
 // import { Expense, ExpenseResponse } from "../types/expenseTypes";
 // import DeleteExpense from "./deleteexpense";
 // import AddExpense from "./addexpense";
@@ -331,7 +330,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks/storehooks";
 import { fetchExpenseWithPagination } from "../redux/actions/expenseactions";
 
 const AllHistory: React.FC = () => {
-  const localstorage_data = JSON.parse(localStorage.getItem("data") as string);
+  // const localstorage_data = JSON.parse(localStorage.getItem("data") as string);
   // const { list, setList,triggerapi,setTriggerapi } = useMyContext();
   // const [triggerapi, setTriggerapi] = useState(false);
   // const [list, setList] = useState<ExpenseResponse>({
@@ -387,6 +386,7 @@ const AllHistory: React.FC = () => {
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setDate((prev) => ({ ...prev, [name]: value }));
+    setPage((prev)=>({ ...prev, page: 1 }))
   };
 
   // const allHistory = useCallback(
@@ -424,13 +424,15 @@ const AllHistory: React.FC = () => {
         date?.todate
       )
     );
-  }, [dispatch, page?.page, page?.limit, date?.todate, triggerapi]);
+  }, // eslint-disable-next-line 
+  [dispatch, page?.page, page?.limit, date?.todate, triggerapi]);
   // Prevent setting todate if fromdate is empty
   useEffect(() => {
     if (date.fromdate && date.todate === "") {
       setDate((prev) => ({ ...prev, todate: date.fromdate }));
     }
-  }, [date.fromdate]);
+  },// eslint-disable-next-line 
+   [date.fromdate]);
 
   // useEffect(() => {
   //   allHistory(list.page);

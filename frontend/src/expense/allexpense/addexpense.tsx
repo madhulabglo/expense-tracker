@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 import { AddExpenseProps } from "../../types/expenseTypes";
-import { expensePostApi } from "../../api/expenseapicalls";
+import { ExpenseFormData } from "../../types/expenseTypes";
+import { useAppDispatch } from "../../redux/hooks/storehooks";
+import { postExpense } from "../../redux/actions/expenseactions";
 
-interface FormData {
-  date: string;
-  category: string;
-  description: string;
-  amount: string;
-  is_expense: boolean;
-}
 
 const AddExpense: React.FC<AddExpenseProps> = ({
   setModal,
@@ -17,8 +12,9 @@ const AddExpense: React.FC<AddExpenseProps> = ({
   triggerapi,
   setTriggerapi,
 }) => {
-  const localstorage_data = JSON.parse(localStorage.getItem("data") as string);
-  const [addExpenseData, setAddExpenseData] = useState<FormData>({
+
+  const dispatch = useAppDispatch()
+  const [addExpenseData, setAddExpenseData] = useState<ExpenseFormData>({
     date: "",
     category: "",
     description: "",
@@ -40,25 +36,39 @@ const AddExpense: React.FC<AddExpenseProps> = ({
     }));
   };
 
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   try {
+  //     setLoading(true);
+  //     const response = await expensePostApi(
+  //       addExpenseData,
+  //       localstorage_data?.token
+  //     );
+  //     // if (list) {
+  //     //   setList((prev) => ({
+  //     //     ...prev,
+  //     //     results: [...prev.results, response.data],
+  //     //   }));
+  //     // }
+  //     setTriggerapi(!triggerapi);
+  //     setLoading(false);
+  //     setModal((prev) => ({ ...prev, add: false }));
+  //   } catch (error) {
+  //     console.log(error, "error");
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      setLoading(true);
-      const response = await expensePostApi(
-        addExpenseData,
-        localstorage_data?.token
-      );
-      // if (list) {
-      //   setList((prev) => ({
-      //     ...prev,
-      //     results: [...prev.results, response.data],
-      //   }));
-      // }
-      setTriggerapi(!triggerapi);
-      setLoading(false);
-      setModal((prev) => ({ ...prev, add: false }));
+      await dispatch(postExpense(addExpenseData));
+      setModal((prev) => ({ ...prev, add: false })); // Close the modal
+      setTriggerapi(!triggerapi); // Trigger the fetch action
     } catch (error) {
-      console.log(error, "error");
+      console.error("Failed to add expense:", error);
+    } finally {
       setLoading(false);
     }
   };

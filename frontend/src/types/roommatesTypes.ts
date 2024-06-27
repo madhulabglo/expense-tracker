@@ -20,6 +20,11 @@ export interface onlyRoomMates {
     results: onlyRoomMates[];
   }
 
+  export interface roomMatesPostResponse {
+    data:onlyRoomMates,
+    success:string
+  }
+
   export interface roomMateseEditProps {
     roomMates: onlyRoomMates;
     setModal: React.Dispatch<

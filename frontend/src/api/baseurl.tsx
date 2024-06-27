@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 
 // const mode = "dev";
 const mode = "prod";
@@ -9,20 +9,25 @@ const baseValues = {
     prod: "https://",
   },
   basehost: {
-    dev: "127.0.0.1:4000/",
-    prod :"expense-tracker-backend-silk.vercel.app/"
+    dev: "127.0.0.1:4000",
+    prod :"expense-tracker-backend-silk.vercel.app"
   },
 };
 
 const baseProtocal = baseValues.baseprotocal[mode];
 const baseHost = baseValues.basehost[mode];
-const baseURL = baseProtocal + baseHost;
+const HTTP = baseProtocal + baseHost;
 
-const HTTP = axios.create({
-  baseURL,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
 
 export {HTTP}
+
+
+// -------- using axios ---------
+// const HTTP = axios.create({
+//   baseURL,
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+// });
+
+// export {HTTP}

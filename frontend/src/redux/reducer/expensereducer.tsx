@@ -1,5 +1,5 @@
 // src/features/user/userReducer.ts
-import { ExpenseResponse, ExpenseResponseWithoutPagination } from "../../types/expenseTypes";
+import { Expense, ExpenseResponse, ExpenseResponseWithoutPagination } from "../../types/expenseTypes";
 import {
   FETCH_EXPENSE_REQUEST,
   FETCH_EXPENSE_SUCCESS,
@@ -12,7 +12,16 @@ import {
   VERIFY_OTP_FAILURE,
   FETCH_PAGINATION_EXPENSE_REQUEST,
   FETCH_PAGINATION_EXPENSE_SUCCESS,
-  FETCH_PAGINATION_EXPENSE_FAILURE
+  FETCH_PAGINATION_EXPENSE_FAILURE,
+  FETCH_EXPENSE_POST_REQUEST,
+  FETCH_EXPENSE_POST_SUCCESS,
+  FETCH_EXPENSE_POST_FAILURE,
+  FETCH_EXPENSE_PATCH_REQUEST,
+  FETCH_EXPENSE_PATCH_SUCCESS,
+  FETCH_EXPENSE_PATCH_FAILURE,
+  FETCH_EXPENSE_DELETE_REQUEST,
+  FETCH_EXPENSE_DELETE_SUCCESS,
+  FETCH_EXPENSE_DELETE_FAILURE
 } from "../constant/expenseconstant";
 
 // Define the interface for the expense state
@@ -87,6 +96,96 @@ export const expensePaginationReducer = (
       return state;
   }
 };
+
+interface expensePostData {
+  loading: boolean;
+  data: Expense | null;
+  error: object | null;
+}
+
+const initialExpensePostState: expensePostData = {
+  loading: false,
+  data: null,
+  error: null,
+};
+
+export const expensePostReducer = (
+  state = initialExpensePostState,
+  action: any
+): expensePostData => {
+  switch (action.type) {
+    case FETCH_EXPENSE_POST_REQUEST:
+      return { ...state, loading: true };
+    case FETCH_EXPENSE_POST_SUCCESS:
+      return { ...state, loading: false, data: action.payload };
+    case FETCH_EXPENSE_POST_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+interface expensePatchData {
+  loading: boolean;
+  data: Expense | null;
+  error: object | null;
+}
+
+const initialExpensePatchState: expensePatchData = {
+  loading: false,
+  data: null,
+  error: null,
+};
+
+export const expensePatchReducer = (
+  state = initialExpensePatchState,
+  action: any
+): expensePatchData => {
+  switch (action.type) {
+    case FETCH_EXPENSE_PATCH_REQUEST:
+      return { ...state, loading: true };
+    case FETCH_EXPENSE_PATCH_SUCCESS:
+      return { ...state, loading: false, data: action.payload };
+    case FETCH_EXPENSE_PATCH_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+interface SuccessData {
+  message?: string;
+  // Add any other properties that logindata might have
+}
+
+interface expenseDeleteData {
+  loading: boolean;
+  data: SuccessData | null;
+  error: object | null;
+}
+
+const initialExpenseDeleteState: expenseDeleteData = {
+  loading: false,
+  data: null,
+  error: null,
+};
+
+export const expenseDeleteReducer = (
+  state = initialExpenseDeleteState,
+  action: any
+): expenseDeleteData => {
+  switch (action.type) {
+    case FETCH_EXPENSE_DELETE_REQUEST:
+      return { ...state, loading: true };
+    case FETCH_EXPENSE_DELETE_SUCCESS:
+      return { ...state, loading: false, data: action.payload };
+    case FETCH_EXPENSE_DELETE_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
 
 interface LoginData {
   message?: string;
