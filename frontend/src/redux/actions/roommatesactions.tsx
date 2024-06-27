@@ -22,8 +22,9 @@ import {
   ROOM_MATES_DELETE_SUCCESS,
   ROOM_MATES_DELETE_FAILURE,
 } from "../constant/roommateconstant";
+import { HTTP } from "../../api/baseurl";
 
-const baseURL = "http://127.0.0.1:4000";
+// const baseURL = "http://127.0.0.1:4000";
 
 const localstorage_data = JSON.parse(localStorage.getItem("data") as string);
 
@@ -50,7 +51,7 @@ export const fetchRoomMatesWithoutPagination = () => {
     try {
       const token = localstorage_data?.token; // Replace with your actual token
 
-      const response = await fetch(`${baseURL}/getallroommate`, {
+      const response = await fetch(`${HTTP}/getallroommate`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -94,7 +95,7 @@ export const fetchRoomMatesWithPagination = (page: number, limit: number) => {
       const token = localstorage_data?.token; // Replace with your actual token
 
       const response = await fetch(
-        `${baseURL}/getroommate?page=${page}&limit=${limit}`,
+        `${HTTP}/getroommate?page=${page}&limit=${limit}`,
         {
           method: "GET",
           headers: {
@@ -136,7 +137,7 @@ export const postRoomMates = (roomMateData: RoomMates) => {
 
     try {
       const token = localstorage_data?.token;
-      const response = await fetch(`${baseURL}/addroommate`, {
+      const response = await fetch(`${HTTP}/addroommate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -176,7 +177,7 @@ export const patchRoomMates = (roomMatesData: onlyRoomMates, id: string) => {
 
     try {
       const token = localstorage_data?.token;
-      const response = await fetch(`${baseURL}/updateroommate/${id}/`, {
+      const response = await fetch(`${HTTP}/updateroommate/${id}/`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -216,7 +217,7 @@ export const deleteRoomMates = (id: string) => {
 
     try {
       const token = localstorage_data?.token;
-      const response = await fetch(`${baseURL}/deleteroommate/${id}/`, {
+      const response = await fetch(`${HTTP}/deleteroommate/${id}/`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

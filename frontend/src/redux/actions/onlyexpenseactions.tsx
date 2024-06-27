@@ -22,8 +22,10 @@ import {
   ONLY_EXPENSE_DELETE_SUCCESS,
   ONLY_EXPENSE_DELETE_FAILURE,
 } from "../constant/onlyexpenseconstant";
+import { HTTP } from "../../api/baseurl";
 
-const baseURL = "http://127.0.0.1:4000";
+
+// const baseURL = "http://127.0.0.1:4000";
 
 const localstorage_data = JSON.parse(localStorage.getItem("data") as string);
 
@@ -50,7 +52,7 @@ export const fetchOnlyExpenseWithoutPagination = () => {
     try {
       const token = localstorage_data?.token; // Replace with your actual token
 
-      const response = await fetch(`${baseURL}/onlyallexpense`, {
+      const response = await fetch(`${HTTP}/onlyallexpense`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -99,7 +101,7 @@ export const fetchOnlyExpenseWithPagination = (
       const token = localstorage_data?.token; // Replace with your actual token
 
       const response = await fetch(
-        `${baseURL}/onlyexpense?page=${page}&limit=${limit}&fromdate=${fromdate}&todate=${todate}`,
+        `${HTTP}/onlyexpense?page=${page}&limit=${limit}&fromdate=${fromdate}&todate=${todate}`,
         {
           method: "GET",
           headers: {
@@ -141,7 +143,7 @@ export const postOnlyExpense = (expensedata: FormData) => {
 
     try {
       const token = localstorage_data?.token;
-      const response = await fetch(`${baseURL}/onlyexpense`, {
+      const response = await fetch(`${HTTP}/onlyexpense`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -181,7 +183,7 @@ export const patchOnlyExpense = (expensedata: onlyExpense, id: string) => {
 
     try {
       const token = localstorage_data?.token;
-      const response = await fetch(`${baseURL}/onlyexpense/${id}/`, {
+      const response = await fetch(`${HTTP}/onlyexpense/${id}/`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -221,7 +223,7 @@ export const deleteOnlyExpense = (id: string) => {
 
     try {
       const token = localstorage_data?.token;
-      const response = await fetch(`${baseURL}/onlyexpense/${id}/`, {
+      const response = await fetch(`${HTTP}/onlyexpense/${id}/`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

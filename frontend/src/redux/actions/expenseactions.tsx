@@ -19,7 +19,7 @@ import {
   ExpenseResponse,
   ExpenseResponseWithoutPagination,
 } from "../../types/expenseTypes";
-const baseURL = "http://127.0.0.1:4000";
+// const baseURL = "http://127.0.0.1:4000";
 
 const localstorage_data = JSON.parse(localStorage.getItem("data") as string);
 
@@ -46,7 +46,7 @@ export const fetchExpenseWithoutPagination = () => {
     try {
       const token = localstorage_data?.token; // Replace with your actual token
 
-      const response = await fetch(`${baseURL}/getallexpense`, {
+      const response = await fetch(`${HTTP}/getallexpense`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -92,7 +92,7 @@ export const fetchExpenseWithPagination = (
       const token = localstorage_data?.token; // Replace with your actual token
 
       const response = await fetch(
-        `${baseURL}/getexpense?page=${page}&limit=${limit}&fromdate=${fromdate}&todate=${todate}`,
+        `${HTTP}/getexpense?page=${page}&limit=${limit}&fromdate=${fromdate}&todate=${todate}`,
         {
           method: "GET",
           headers: {
@@ -132,7 +132,7 @@ export const postEmailAddress = (logindata: any) => {
     dispatch(postEmailRequest());
 
     try {
-      const response = await fetch(`${baseURL}/`, {
+      const response = await fetch(`${HTTP}/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -170,7 +170,7 @@ export const postOtpVerification = (loginData: any) => {
     dispatch(postOtpRequest());
 
     try {
-      const response = await fetch(`${baseURL}/verify-otp`, {
+      const response = await fetch(`${HTTP}/verify-otp`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
