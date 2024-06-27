@@ -1,9 +1,10 @@
 import { Dispatch } from "redux";
 import { CALCULATION_FAILURE, CALCULATION_REQUEST, CALCULATION_SUCCESS } from "../constant/calculationconstant";
 import { calculationResponse } from "../../types/onlyexpenseTypes";
+import { HTTP } from "../../api/baseurl";
 
 
-const baseURL = "http://127.0.0.1:4000";
+// const baseURL = "http://127.0.0.1:4000";
 
 const localstorage_data = JSON.parse(localStorage.getItem("data") as string);
 
@@ -27,7 +28,7 @@ export const getCalculation = (fromdate:string,todate:string,name:string,split:s
     
         try {
           const token = localstorage_data?.token; // Replace with your actual token    
-          const response = await fetch(`${baseURL}/specificcalculation?fromdate=${fromdate}&todate=${todate}&name=${name}&split=${split}`, {
+          const response = await fetch(`${HTTP}/specificcalculation?fromdate=${fromdate}&todate=${todate}&name=${name}&split=${split}`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",

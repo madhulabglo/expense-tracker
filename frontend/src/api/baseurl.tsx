@@ -1,15 +1,16 @@
 import axios from "axios";
 
-const mode = "dev";
-// const mode = "prod";
+// const mode = "dev";
+const mode = "prod";
 
 const baseValues = {
   baseprotocal: {
     dev: "http://",
-    prod: "http://",
+    prod: "https://",
   },
   basehost: {
     dev: "127.0.0.1:4000/",
+    prod :"expense-tracker-backend-silk.vercel.app/"
   },
 };
 
