@@ -59,6 +59,7 @@ export const fetchExpenseWithoutPagination = () => {
 
       const response = await fetch(`${HTTP}/getallexpense`, {
         method: "GET",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`, // Include your token here
@@ -106,6 +107,7 @@ export const fetchExpenseWithPagination = (
         `${HTTP}/getexpense?page=${page}&limit=${limit}&fromdate=${fromdate}&todate=${todate}`,
         {
           method: "GET",
+          credentials: 'include',
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`, // Include your token here
@@ -146,6 +148,7 @@ export const postExpense = (expensedata: ExpenseFormData) => {
       const token = localstorage_data?.token;
       const response = await fetch(`${HTTP}/addexpense`, {
         method: "POST",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -186,6 +189,7 @@ export const patchExpense = (expensedata: Expense, id: string) => {
       const token = localstorage_data?.token;
       const response = await fetch(`${HTTP}/updateexpense/${id}/`, {
         method: "PATCH",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -226,6 +230,7 @@ export const deleteExpense = (id: string) => {
       const token = localstorage_data?.token;
       const response = await fetch(`${HTTP}/deleteexpense/${id}/`, {
         method: "DELETE",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -268,6 +273,7 @@ export const postEmailAddress = (logindata: any) => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: 'include',
         body: JSON.stringify(logindata),
       });
       if (!response.ok) {
@@ -306,6 +312,7 @@ export const postOtpVerification = (loginData: any) => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: 'include',
         body: JSON.stringify(loginData),
       });
 

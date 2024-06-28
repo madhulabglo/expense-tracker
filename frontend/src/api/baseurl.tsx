@@ -16,7 +16,7 @@ const baseValues = {
 
 const baseProtocal = baseValues.baseprotocal[mode];
 const baseHost = baseValues.basehost[mode];
-const HTTP = baseProtocal + baseHost;
+const HTTP = `${baseProtocal}${baseHost}`;
 
 
 export {HTTP}
