@@ -52,7 +52,7 @@ export const fetchOnlyExpenseWithoutPagination = () => {
     try {
       const token = localstorage_data?.token; // Replace with your actual token
 
-      const response = await fetch(`${HTTP}/onlyallexpense`, {
+      const response = await fetch(`${HTTP}/api/onlyexpenses/onlyallexpense`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -101,7 +101,7 @@ export const fetchOnlyExpenseWithPagination = (
       const token = localstorage_data?.token; // Replace with your actual token
 
       const response = await fetch(
-        `${HTTP}/onlyexpense?page=${page}&limit=${limit}&fromdate=${fromdate}&todate=${todate}`,
+        `${HTTP}/api/onlyexpenses/onlyexpense?page=${page}&limit=${limit}&fromdate=${fromdate}&todate=${todate}`,
         {
           method: "GET",
           headers: {
@@ -143,7 +143,7 @@ export const postOnlyExpense = (expensedata: FormData) => {
 
     try {
       const token = localstorage_data?.token;
-      const response = await fetch(`${HTTP}/onlyexpense`, {
+      const response = await fetch(`${HTTP}/api/onlyexpenses/onlyexpense`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -183,7 +183,7 @@ export const patchOnlyExpense = (expensedata: onlyExpense, id: string) => {
 
     try {
       const token = localstorage_data?.token;
-      const response = await fetch(`${HTTP}/onlyexpense/${id}/`, {
+      const response = await fetch(`${HTTP}/api/onlyexpenses/onlyexpense/${id}/`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -223,7 +223,7 @@ export const deleteOnlyExpense = (id: string) => {
 
     try {
       const token = localstorage_data?.token;
-      const response = await fetch(`${HTTP}/onlyexpense/${id}/`, {
+      const response = await fetch(`${HTTP}/api/onlyexpenses/onlyexpense/${id}/`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

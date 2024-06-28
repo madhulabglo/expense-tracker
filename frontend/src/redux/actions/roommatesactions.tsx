@@ -52,7 +52,7 @@ export const fetchRoomMatesWithoutPagination = () => {
     try {
       const token = localstorage_data?.token; // Replace with your actual token
 
-      const response = await fetch(`${HTTP}/getallroommate`, {
+      const response = await fetch(`${HTTP}/api/roommates/getallroommate`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -96,7 +96,7 @@ export const fetchRoomMatesWithPagination = (page: number, limit: number) => {
       const token = localstorage_data?.token; // Replace with your actual token
 
       const response = await fetch(
-        `${HTTP}/getroommate?page=${page}&limit=${limit}`,
+        `${HTTP}/api/roommates/getroommate?page=${page}&limit=${limit}`,
         {
           method: "GET",
           headers: {
@@ -138,7 +138,7 @@ export const postRoomMates = (roomMateData: RoomMates) => {
 
     try {
       const token =  localstorage_data?.token;
-      const response = await fetch(`${HTTP}/addroommate`, {
+      const response = await fetch(`${HTTP}/api/roommates/addroommate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -182,7 +182,7 @@ export const patchRoomMates = (roomMatesData: onlyRoomMates, id: string) => {
 
     try {
       const token = localstorage_data?.token;
-      const response = await fetch(`${HTTP}/updateroommate/${id}/`, {
+      const response = await fetch(`${HTTP}/api/roommates/updateroommate/${id}/`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -223,7 +223,7 @@ export const deleteRoomMates = (id: string) => {
 
     try {
       const token = localstorage_data?.token;
-      const response = await fetch(`${HTTP}/deleteroommate/${id}/`, {
+      const response = await fetch(`${HTTP}/api/roommates/deleteroommate/${id}/`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

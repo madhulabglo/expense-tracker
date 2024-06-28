@@ -57,7 +57,7 @@ export const fetchExpenseWithoutPagination = () => {
     try {
       const token = localstorage_data?.token; // Replace with your actual token
 
-      const response = await fetch(`${HTTP}/getallexpense`, {
+      const response = await fetch(`${HTTP}/api/expenses/getallexpense`, {
         method: "GET",
         credentials: 'include',
         headers: {
@@ -104,7 +104,7 @@ export const fetchExpenseWithPagination = (
       const token = localstorage_data?.token; // Replace with your actual token
 
       const response = await fetch(
-        `${HTTP}/getexpense?page=${page}&limit=${limit}&fromdate=${fromdate}&todate=${todate}`,
+        `${HTTP}/api/expenses/getexpense?page=${page}&limit=${limit}&fromdate=${fromdate}&todate=${todate}`,
         {
           method: "GET",
           credentials: 'include',
@@ -146,7 +146,7 @@ export const postExpense = (expensedata: ExpenseFormData) => {
 
     try {
       const token = localstorage_data?.token;
-      const response = await fetch(`${HTTP}/addexpense`, {
+      const response = await fetch(`${HTTP}/api/expenses/addexpense`, {
         method: "POST",
         credentials: 'include',
         headers: {
@@ -187,7 +187,7 @@ export const patchExpense = (expensedata: Expense, id: string) => {
 
     try {
       const token = localstorage_data?.token;
-      const response = await fetch(`${HTTP}/updateexpense/${id}/`, {
+      const response = await fetch(`${HTTP}/api/expenses/updateexpense/${id}/`, {
         method: "PATCH",
         credentials: 'include',
         headers: {
@@ -228,7 +228,7 @@ export const deleteExpense = (id: string) => {
 
     try {
       const token = localstorage_data?.token;
-      const response = await fetch(`${HTTP}/deleteexpense/${id}/`, {
+      const response = await fetch(`${HTTP}/api/expenses/deleteexpense/${id}/`, {
         method: "DELETE",
         credentials: 'include',
         headers: {
@@ -268,7 +268,7 @@ export const postEmailAddress = (logindata: any) => {
     dispatch(postEmailRequest());
 
     try {
-      const response = await fetch(`${HTTP}/`, {
+      const response = await fetch(`${HTTP}/api/otp/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -307,7 +307,7 @@ export const postOtpVerification = (loginData: any) => {
     dispatch(postOtpRequest());
 
     try {
-      const response = await fetch(`${HTTP}/verify-otp`, {
+      const response = await fetch(`${HTTP}/api/otp/verify-otp`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
