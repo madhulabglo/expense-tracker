@@ -10,7 +10,7 @@ const baseValues = {
   },
   basehost: {
     dev: "127.0.0.1:4000",
-    prod :"expense-tracker-backend-8tws59sa6-madhulabglos-projects.vercel.app"
+    prod :"expense-tracker-backend-git-master-madhulabglos-projects.vercel.app"
   },
 };
 
