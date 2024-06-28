@@ -12,4 +12,4 @@ const OtpSchema : Schema = new Schema({
     otp:{type:String,required:true},
     createdAt:{type:Date,default:Date.now , index:{expires:"5m"}}
 })
-export const Otp = model<Otp>("Otp",OtpSchema)
+export const Otp = model<Otp>("EmailOtp",OtpSchema)

@@ -29,7 +29,7 @@ app.use(cors(corsOptions));
 // Enhanced logging
 app.use((req, res, next) => {
   console.log(`Received ${req.method} request for ${req.url}`);
-  console.log('Request Headers:', req.headers);
+  // console.log('Request Headers:', req.headers);
   next();
 });
 
@@ -44,10 +44,10 @@ app.get('/', (req: Request, res: Response) => {
 connectToDB();
 
 // Routes
-app.use(otpRoutes)
-app.use(expenseRoutes)
-app.use(onlyexpenseRoutes)
-app.use(roommateRoutes)
+app.use('/api/otp', otpRoutes);
+app.use('/api/expenses', expenseRoutes);
+app.use('/api/onlyexpenses', onlyexpenseRoutes);
+app.use('/api/roommates', roommateRoutes);
 
 // Start server
 app.listen(port, () => {
