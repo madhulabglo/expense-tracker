@@ -21,7 +21,7 @@ const port = process.env.PORT || 4000;
 //   origin: 'http://localhost:3000', 
 //   credentials: true 
 // }));
-app.use(cors({ credentials: true, origin: ["http://localhost:3000","https://expense-tracker-frontend-beqfqx1ol-madhulabglos-projects.vercel.app"] }))
+app.use(cors({ credentials: true, origin: ["http://localhost:3000","https://expense-tracker-frontend-git-master-madhulabglos-projects.vercel.app"] }))
 
 // Middleware to parse JSON
 app.use(express.json());
