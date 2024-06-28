@@ -28,7 +28,7 @@ export const getCalculation = (fromdate:string,todate:string,name:string,split:s
     
         try {
           const token = localstorage_data?.token; // Replace with your actual token    
-          const response = await fetch(`${HTTP}/specificcalculation?fromdate=${fromdate}&todate=${todate}&name=${name}&split=${split}`, {
+          const response = await fetch(`${HTTP}/api/onlyexpenses/specificcalculation?fromdate=${fromdate}&todate=${todate}&name=${name}&split=${split}`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
