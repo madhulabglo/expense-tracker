@@ -1,6 +1,4 @@
-// src/index.ts
 import express, { Request, Response } from 'express';
-import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import loginRoutes from './router/loginRouter';
 import otpRoutes from "./router/otpRouter"
@@ -11,39 +9,47 @@ import cors from "cors"
 
 import connectToDB from './config/dbConfig';
 
-
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 4000;
 
-// app.use(cors({
-//   origin: 'http://localhost:3000', 
-//   credentials: true 
-// }));
-app.use(cors({ credentials: true, origin: ["http://localhost:3000","https://expense-tracker-frontend-git-master-madhulabglos-projects.vercel.app"] }))
+const corsOptions = {
+  origin: [
+    'http://localhost:3000',
+    'https://expense-tracker-frontend-git-master-madhulabglos-projects.vercel.app'
+  ],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204
+};
+
+app.use(cors(corsOptions));
+
+// Enhanced logging
+app.use((req, res, next) => {
+  console.log(`Received ${req.method} request for ${req.url}`);
+  console.log('Request Headers:', req.headers);
+  next();
+});
 
 // Middleware to parse JSON
 app.use(express.json());
-
-// Routes
-// app.use('/api', userRoutes);
 
 // Basic route
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello, world!');
 });
 
-connectToDB()
-// app.use("/api",loginRoutes)
+connectToDB();
+
+// Routes
 app.use(otpRoutes)
 app.use(expenseRoutes)
 app.use(onlyexpenseRoutes)
 app.use(roommateRoutes)
 
-
 // Start server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
-   
