@@ -10,3 +10,4 @@ router.get("/getexpense", authendicate_1.authenticateToken, expenseController_1.
 router.patch("/updateexpense/:id/", authendicate_1.authenticateToken, expenseController_1.updateExpense);
 router.delete("/deleteexpense/:id/", authendicate_1.authenticateToken, expenseController_1.deleteExpense);
 exports.default = router;
+//# sourceMappingURL=expenseRouter.js.map

@@ -10,3 +10,4 @@ router.get("/getroommate", authendicate_1.authenticateToken, roommatesController
 router.patch("/updateroommate/:id/", authendicate_1.authenticateToken, roommatesController_1.updateRoommates);
 router.delete("/deleteroommate/:id/", authendicate_1.authenticateToken, roommatesController_1.deleteRoommate);
 exports.default = router;
+//# sourceMappingURL=roommateRouter.js.map

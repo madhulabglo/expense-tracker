@@ -150,3 +150,4 @@ const deleteExpense = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.deleteExpense = deleteExpense;
+//# sourceMappingURL=expenseController.js.map

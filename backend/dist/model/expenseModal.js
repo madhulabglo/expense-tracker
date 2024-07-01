@@ -13,3 +13,4 @@ const expenseSchema = new mongoose_1.Schema({
     },
 });
 exports.Expense = (0, mongoose_1.model)("expense", expenseSchema);
+//# sourceMappingURL=expenseModal.js.map

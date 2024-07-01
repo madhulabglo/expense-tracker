@@ -14,6 +14,7 @@ const dbConfig_1 = __importDefault(require("./config/dbConfig"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 4000;
+// https://expense-tracker-backend-git-master-madhulabglos-projects.vercel.app
 const corsOptions = {
     origin: [
         'http://localhost:3000',
@@ -33,7 +34,7 @@ app.use((req, res, next) => {
 // Middleware to parse JSON
 app.use(express_1.default.json());
 // Basic route
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     res.send('Hello, world!');
 });
 (0, dbConfig_1.default)();
@@ -44,5 +45,6 @@ app.use('/api/onlyexpenses', onlyexpenseRouter_1.default);
 app.use('/api/roommates', roommateRouter_1.default);
 // Start server
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Server is running on https://expense-tracker-backend-git-master-madhulabglos-projects.vercel.app:${port}`);
 });
+//# sourceMappingURL=index.js.map

@@ -6,3 +6,4 @@ const router = (0, express_1.Router)();
 router.post("/login", loginController_1.getOtp);
 router.post("/verifyotp", loginController_1.verifyOtp);
 exports.default = router;
+//# sourceMappingURL=loginRouter.js.map

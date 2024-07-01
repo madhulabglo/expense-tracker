@@ -24,3 +24,4 @@ const authenticateToken = (req, res, next) => {
     }
 };
 exports.authenticateToken = authenticateToken;
+//# sourceMappingURL=authendicate.js.map

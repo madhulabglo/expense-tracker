@@ -193,3 +193,4 @@ const onlyExpenseDelete = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 exports.onlyExpenseDelete = onlyExpenseDelete;
+//# sourceMappingURL=onlyexpenseController.js.map

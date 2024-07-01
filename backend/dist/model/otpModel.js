@@ -8,3 +8,4 @@ const OtpSchema = new mongoose_1.Schema({
     createdAt: { type: Date, default: Date.now, index: { expires: "5m" } }
 });
 exports.Otp = (0, mongoose_1.model)("EmailOtp", OtpSchema);
+//# sourceMappingURL=otpModel.js.map

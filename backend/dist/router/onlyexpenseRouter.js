@@ -11,3 +11,4 @@ router.patch("/onlyexpense/:id/", authendicate_1.authenticateToken, onlyexpenseC
 router.delete("/onlyexpense/:id/", authendicate_1.authenticateToken, onlyexpenseController_1.onlyExpenseDelete);
 router.get("/specificcalculation", authendicate_1.authenticateToken, onlyexpenseController_1.specifiPersonCalculation);
 exports.default = router;
+//# sourceMappingURL=onlyexpenseRouter.js.map

@@ -6,3 +6,4 @@ const RoomMateSchema = new mongoose_1.Schema({
     name: { type: String, required: true }
 });
 exports.RoomMates = (0, mongoose_1.model)("roommates", RoomMateSchema);
+//# sourceMappingURL=roomMatesModel.js.map
