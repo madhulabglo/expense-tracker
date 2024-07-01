@@ -35,6 +35,7 @@ app.use((req, res, next) => {
 app.use(express_1.default.json());
 // Basic route
 app.get('/api', (req, res) => {
+    console.log("first urlllll");
     res.send('Hello, world!');
 });
 (0, dbConfig_1.default)();

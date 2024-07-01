@@ -28,7 +28,9 @@ const otpgenerator = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         }
         const otp = crypto_1.default.randomInt(100000, 999999).toString();
         const newOtp = new otpModel_1.Otp({ email, otp });
+        console.log(email, otp, "emaillll otptptptpt");
         yield (0, smsServices_1.sendOtp)(email, otp);
+        console.log("OTP sent to email");
         yield newOtp.save();
         res.status(201).json({ message: "OTP sent to your email" });
     }

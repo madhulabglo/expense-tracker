@@ -39,6 +39,8 @@ app.use(express.json());
 
 // Basic route
 app.get('/api', (req: Request, res: Response) => {
+  console.log("first urlllll");
+  
   res.send('Hello, world!');
 });
 
