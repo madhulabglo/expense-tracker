@@ -28,6 +28,7 @@ export const otpgenerator = async (req: Request, res: Response) => {
     await sendOtp(email, otp);
     console.log("OTP sent to email");
     await newOtp.save();
+    console.log("OTP saved to DB successfully");
 
     res.status(201).json({ message: "OTP sent to your email" });
   } catch (error) {

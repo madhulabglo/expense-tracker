@@ -12,6 +12,7 @@ const transporter = nodemailer.createTransport({
 });
 
 export const sendOtp = async (email: string, otp: string) => {
+  console.log(email,otp,"send optt=t")
   const mailOptions = {
     from: 'madhumathi.labglo@gmail.com',
     to: email,
