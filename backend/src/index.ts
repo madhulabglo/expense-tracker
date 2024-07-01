@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 // Basic route
-app.get('/', (req: Request, res: Response) => {
+app.get('/api', (req: Request, res: Response) => {
   res.send('Hello, world!');
 });
 
