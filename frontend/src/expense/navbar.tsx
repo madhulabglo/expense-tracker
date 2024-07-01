@@ -20,6 +20,10 @@ const Nav: React.FC = () => {
     navigate("/");
   };
 
+  const handleImageClick = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-light">
@@ -29,6 +33,7 @@ const Nav: React.FC = () => {
               src="https://cdn-icons-png.flaticon.com/512/5501/5501384.png"
               alt="expense"
               style={{ width: "50px", height: "50px" }}
+              onClick={handleImageClick}
             />
           </span>
           <p className="title">Expense Tracker</p>
@@ -54,35 +59,35 @@ const Nav: React.FC = () => {
           </a>
         </div>
       </nav>
-      <div className="drawer">
+      <div className={`drawer ${isDrawerOpen ? "open" : ""}`}>
         <ul>
-          <li>
+          <li className="drawer-item">
             <a
               href="/home"
               className={location.pathname === "/home" ? "active-link" : ""}
             >
               <i
-                className={`bi bi-house ${
+                className={`bi bi-house drawer-icon ${
                   location.pathname === "/home" ? "active-link" : ""
                 }`}
               ></i>
-              Home
+              <span className="text">Home</span>
             </a>
           </li>
-          <li>
+          <li className="drawer-item">
             <a
               href="/expense"
               className={location.pathname === "/expense" ? "active-link" : ""}
             >
               <i
-                className={`bi bi-file-earmark ${
+                className={`bi bi-file-earmark drawer-icon ${
                   location.pathname === "/expense" ? "active-link" : ""
                 }`}
               ></i>
-              Expense
+              <span className="text">Expense</span>
             </a>
           </li>
-          <li>
+          <li className="drawer-item">
             <a
               href="/roommates"
               className={
@@ -90,11 +95,11 @@ const Nav: React.FC = () => {
               }
             >
               <i
-                className={`bi bi-people-fill ${
+                className={`bi bi-people-fill drawer-icon ${
                   location.pathname === "/roommates" ? "active-link" : ""
                 }`}
               ></i>
-              Room Mates
+              <span className="text">Room Mates</span>
             </a>
           </li>
         </ul>
