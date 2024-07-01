@@ -32,6 +32,7 @@ const otpgenerator = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         yield (0, smsServices_1.sendOtp)(email, otp);
         console.log("OTP sent to email");
         yield newOtp.save();
+        console.log("OTP saved to DB successfully");
         res.status(201).json({ message: "OTP sent to your email" });
     }
     catch (error) {

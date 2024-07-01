@@ -23,6 +23,8 @@ const connectToDB = () => __awaiter(void 0, void 0, void 0, function* () {
             yield mongoose_1.default.connect(DB, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
+                // useCreateIndex: true,
+                // useFindAndModify: false,
             });
             console.log("DB connected Successfully");
         }
