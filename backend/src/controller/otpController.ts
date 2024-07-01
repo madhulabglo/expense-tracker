@@ -22,8 +22,11 @@ export const otpgenerator = async (req: Request, res: Response) => {
 
     const otp = crypto.randomInt(100000, 999999).toString();
     const newOtp = new Otp({ email, otp });
+    console.log(email,otp,"emaillll otptptptpt");
+    
 
     await sendOtp(email, otp);
+    console.log("OTP sent to email");
     await newOtp.save();
 
     res.status(201).json({ message: "OTP sent to your email" });
