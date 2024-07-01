@@ -14,3 +14,4 @@ const onlyExpenseSchema = new mongoose_1.Schema({
     amount_details: { type: [amountArraySchema] },
 });
 exports.onlyExpenseData = (0, mongoose_1.model)("OnlyExpense", onlyExpenseSchema);
+//# sourceMappingURL=onlyexpenseModel.js.map

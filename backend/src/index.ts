@@ -13,6 +13,7 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 4000;
+// https://expense-tracker-backend-git-master-madhulabglos-projects.vercel.app
 
 const corsOptions = {
   origin: [
@@ -51,5 +52,5 @@ app.use('/api/roommates', roommateRoutes);
 
 // Start server
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on https://expense-tracker-backend-git-master-madhulabglos-projects.vercel.app:${port}`);
 });

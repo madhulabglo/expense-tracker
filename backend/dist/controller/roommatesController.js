@@ -108,3 +108,4 @@ const deleteRoommate = (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
 });
 exports.deleteRoommate = deleteRoommate;
+//# sourceMappingURL=roommatesController.js.map

@@ -138,3 +138,4 @@ function generateOTP(length = 4) {
     return otp.padStart(length, '0');
 }
 exports.generateOTP = generateOTP;
+//# sourceMappingURL=otpgenerator.js.map

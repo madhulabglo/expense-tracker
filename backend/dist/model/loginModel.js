@@ -18,3 +18,4 @@ const otpSchema = new mongoose_1.Schema({
     secret: { type: String, required: true },
 });
 exports.OtpModel = (0, mongoose_1.model)('Otp', otpSchema);
+//# sourceMappingURL=loginModel.js.map
