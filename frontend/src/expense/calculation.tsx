@@ -38,6 +38,7 @@ const Calculation: React.FC = () => {
   );
 
   const personAmount = personExpense ? personExpense[date?.name] : 0;
+
   const single_person_getting_amount =
     calculation_data?.list?.total_expense_amount - personAmount;
 
@@ -176,11 +177,14 @@ const Calculation: React.FC = () => {
                 </p>
                 <p>
                   {`${date?.name}'s Expense Amount `}
-                  <span className="amount">{`₹${personAmount}`}</span>{" "}
-                </p>
-                <p style={{ color: "green" }}>
-                  {`${date?.name}'s Getting Amount from Others `}
-                  <span className="amount">{`₹${single_person_getting_amount}`}</span>
+                  <span className="amount">{`₹${
+                    personExpense &&
+                    date?.split !== "" &&
+                    calculation_data?.list?.person_spliting_amount !== 0
+                      ? personAmount +
+                        calculation_data?.list?.person_spliting_amount
+                      : personAmount
+                  }`}</span>{" "}
                 </p>
                 <hr />
                 {calculation_data?.list?.other_person_expense?.map(
@@ -218,6 +222,15 @@ const Calculation: React.FC = () => {
                     <span className="amount">{`₹${calculation_data?.list?.person_spliting_amount}`}</span>
                   </p>
                 )}
+                <p style={{ color: "green" }}>
+                  {`${date?.name}'s Getting Amount from Others `}
+                  <span className="amount">{`₹${
+                    calculation_data?.list?.person_spliting_amount !== 0
+                      ? single_person_getting_amount -
+                        calculation_data?.list?.person_spliting_amount
+                      : single_person_getting_amount
+                  }`}</span>
+                </p>
               </>
             )}
           </div>

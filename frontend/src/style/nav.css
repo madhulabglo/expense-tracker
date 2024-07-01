@@ -17,7 +17,13 @@
   height: 100%;
   background-color: white;
   padding-top: 50px;
+  transition: width 0.5s;
   /* Remove transform property as the drawer is always visible */
+}
+.open {
+  width:60px;
+  z-index: 999;
+
 }
 
 .drawer ul {
@@ -49,6 +55,28 @@
 .drawer li i:hover {
   color: green;
 }
+
+/* Initially, the text is visible */
+.drawer .drawer-item .text {
+  display: inline;
+}
+
+/* When the drawer is open, hide the text */
+.drawer.open .drawer-item .text {
+  display: none;
+}
+
+.drawer .drawer-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.drawer .drawer-icon {
+  font-size: 1.5rem;
+  padding-right: 10px;
+}
+
 
 /* .drawer-open {
   transform: translateX(0);
