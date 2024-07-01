@@ -157,7 +157,7 @@ export const specifiPersonCalculation = async (req: Request, res: Response) => {
 
     const non_person_totals = room.reduce<Totals>((acc, person) => {
       // Check if the current person is the same as the passed name
-      if (person !== name) {
+      if (person !== name&& totals[person] !== 0) {
         // If not, calculate the total expense for this person
         const personTotal = get_roommates_expense_amount
           .filter((obj) => obj.name !== name) // Exclude expenses for the passed name
