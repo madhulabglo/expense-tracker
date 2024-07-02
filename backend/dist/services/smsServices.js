@@ -24,6 +24,7 @@ const transporter = nodemailer_1.default.createTransport({
     }
 });
 const sendOtp = (email, otp) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(email, otp, "send optt=t");
     const mailOptions = {
         from: 'madhumathi.labglo@gmail.com',
         to: email,
