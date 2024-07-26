@@ -10,6 +10,7 @@ import RoomMatesDelete from "./deleteroommates";
 
 import "../../style/allhistory.css";
 import Modal from "../../commoncomponents/modal";
+import SuccessMessage from "../../commoncomponents/successmessage";
 
 const RoomMates: React.FC = () => {
   // const localstorage_data = JSON.parse(localStorage.getItem("data") as string);
@@ -34,6 +35,11 @@ const RoomMates: React.FC = () => {
 
   const [page, setPage] = useState({ page: 1, limit: 5 });
   const [triggerapi, setTriggerapi] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<
+    string | null | undefined
+  >(null);
+  const [messagedisplay, setMessageDisplay] = useState<boolean>(false);
+
   const handleEdit = (roomMatesData: onlyRoomMates) => {
     setSelectedExpense(roomMatesData);
     setModalOpen((prev) => ({ ...prev, edit: true }));
@@ -58,6 +64,13 @@ const RoomMates: React.FC = () => {
   return (
     <div>
       <Nav />
+      {messagedisplay && (
+        <SuccessMessage
+          message={successMessage}
+          clearMessage={() => setSuccessMessage(null)}
+          setMessageDisplay={setMessageDisplay}
+        />
+      )}
       <div className="history-container">
         <h5>Room Mates</h5>
       </div>
@@ -188,6 +201,8 @@ const RoomMates: React.FC = () => {
             // list={list}
             triggerapi={triggerapi}
             setTriggerapi={setTriggerapi}
+            setSuccessMessage={setSuccessMessage}
+            setMessageDisplay={setMessageDisplay}
           />
         )}
       </Modal>
@@ -204,6 +219,8 @@ const RoomMates: React.FC = () => {
             // list={list}
             triggerapi={triggerapi}
             setTriggerapi={setTriggerapi}
+            setSuccessMessage={setSuccessMessage}
+            setMessageDisplay={setMessageDisplay}
           />
         )}
       </Modal>
@@ -220,6 +237,8 @@ const RoomMates: React.FC = () => {
             // list={list}
             triggerapi={triggerapi}
             setTriggerapi={setTriggerapi}
+            setSuccessMessage={setSuccessMessage}
+            setMessageDisplay={setMessageDisplay}
           />
         )}
       </Modal>

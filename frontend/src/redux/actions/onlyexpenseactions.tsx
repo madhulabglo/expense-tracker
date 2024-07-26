@@ -63,8 +63,8 @@ export const fetchOnlyExpenseWithoutPagination = () => {
         throw new Error("Network response was not ok");
       }
       const allexpense = await response.json();
-
       dispatch(fetchOnlyExpenseSuccess(allexpense));
+      return allexpense
     } catch (error) {
       // Type assertion to specify that error is an instance of Error
       dispatch(fetchOnlyExpenseFailure((error as Error).message));
@@ -114,8 +114,8 @@ export const fetchOnlyExpenseWithPagination = (
         throw new Error("Network response was not ok");
       }
       const allexpense = await response.json();
-
       dispatch(fetchOnlyExpensePaginationSuccess(allexpense));
+      return allexpense
     } catch (error) {
       // Type assertion to specify that error is an instance of Error
       dispatch(fetchOnlyExpensePaginationFailure((error as Error).message));
@@ -156,6 +156,7 @@ export const postOnlyExpense = (expensedata: FormData) => {
       }
       const allexpense = await response.json();
       dispatch(onlyExpensePostSuccess(allexpense));
+      return allexpense
     } catch (error) {
       // Type assertion to specify that error is an instance of Error
       dispatch(onlyExpensePostFailure((error as Error).message));
@@ -196,6 +197,7 @@ export const patchOnlyExpense = (expensedata: onlyExpense, id: string) => {
       }
       const allexpense = await response.json();
       dispatch(onlyExpensePatchSuccess(allexpense));
+      return allexpense
     } catch (error) {
       // Type assertion to specify that error is an instance of Error
       dispatch(onlyExpensePatchFailure((error as Error).message));
@@ -235,6 +237,7 @@ export const deleteOnlyExpense = (id: string) => {
       }
       const allexpense = await response.json();
       dispatch(onlyExpenseDeleteSuccess(allexpense));
+      return allexpense
     } catch (error) {
       // Type assertion to specify that error is an instance of Error
       dispatch(onlyExpenseDeleteFailure((error as Error).message));

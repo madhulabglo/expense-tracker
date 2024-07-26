@@ -328,6 +328,7 @@ import DeleteExpense from "./allexpense/deleteexpense";
 import AddExpense from "./allexpense/addexpense";
 import { useAppDispatch, useAppSelector } from "../redux/hooks/storehooks";
 import { fetchExpenseWithPagination } from "../redux/actions/expenseactions";
+import SuccessMessage from "../commoncomponents/successmessage";
 
 const AllHistory: React.FC = () => {
   // const localstorage_data = JSON.parse(localStorage.getItem("data") as string);
@@ -364,11 +365,13 @@ const AllHistory: React.FC = () => {
   const [page, setPage] = useState({ page: 1, limit: 5 });
   const [date, setDate] = useState({ fromdate: "", todate: "" });
   const [triggerapi, setTriggerapi] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null | undefined>(null);
+  const [messagedisplay,setMessageDisplay]=useState<boolean>(false)
 
   const handleEdit = (expense: Expense) => {
     setSelectedExpense(expense);
     setModalOpen((prev) => ({ ...prev, edit: true }));
-  };
+  };  
 
   const handleDelete = (expense: Expense) => {
     setSelectedExpense(expense);
@@ -446,10 +449,12 @@ const AllHistory: React.FC = () => {
       year: "numeric",
     });
   };
+console.log(messagedisplay,"successs message");
 
   return (
     <div>
-      <Nav />
+      <Nav /> 
+      {messagedisplay &&<SuccessMessage message={successMessage} clearMessage={() => setSuccessMessage(null)} setMessageDisplay={setMessageDisplay}  />}
       <div className="history-container">
         <h5>All History</h5>
         <div className="history-date-filter">
@@ -630,6 +635,8 @@ const AllHistory: React.FC = () => {
             // list={list}
             triggerapi={triggerapi}
             setTriggerapi={setTriggerapi}
+            setSuccessMessage={setSuccessMessage}
+            setMessageDisplay={setMessageDisplay}
           />
         )}
       </Modal>
@@ -646,6 +653,8 @@ const AllHistory: React.FC = () => {
             // list={list}
             triggerapi={triggerapi}
             setTriggerapi={setTriggerapi}
+            setSuccessMessage={setSuccessMessage}
+            setMessageDisplay={setMessageDisplay}
           />
         )}
       </Modal>
@@ -662,6 +671,8 @@ const AllHistory: React.FC = () => {
             // list={list}
             triggerapi={triggerapi}
             setTriggerapi={setTriggerapi}
+            setSuccessMessage={setSuccessMessage}
+            setMessageDisplay={setMessageDisplay}
           />
         )}
       </Modal>

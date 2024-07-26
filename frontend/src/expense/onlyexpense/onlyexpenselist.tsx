@@ -12,6 +12,7 @@ import OnlyExpenseEdit from "./onlyexpenseedit";
 import OnlyExpensDelete from "./onlyexpensedelete";
 import { useNavigate } from "react-router-dom";
 import { fetchRoomMatesWithoutPagination } from "../../redux/actions/roommatesactions";
+import SuccessMessage from "../../commoncomponents/successmessage";
 
  interface DateRange {
   fromdate: string;
@@ -21,7 +22,6 @@ import { fetchRoomMatesWithoutPagination } from "../../redux/actions/roommatesac
 const Expenselist: React.FC = () => {
   const expense = useAppSelector((state) => state.onlyexpensePagination);
   const roommates = useAppSelector((state) => state.roomMates?.roomMatesList);
-  console.log(roommates, "roommates");
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -43,6 +43,8 @@ const Expenselist: React.FC = () => {
   const [date, setDate] = useState<DateRange>({ fromdate: "", todate: "" });
   const [triggerapi, setTriggerapi] = useState(false);
   const [roommate, setRoommate] = useState<Roommate[]>([]);
+  const [successMessage,setSuccessMessage] = useState<string | null | undefined>(null)
+  const [messagedisplay,setMessageDisplay]= useState<boolean>(false)
 
   useEffect(() => {
     const today = new Date();
@@ -144,7 +146,6 @@ const Expenselist: React.FC = () => {
     [roommates]
   );
 
-  console.log(roommate, roommates, "rommmmmmmm");
 
   const formatDateString = (dateString: string): string => {
     const date = new Date(dateString);
@@ -158,6 +159,7 @@ const Expenselist: React.FC = () => {
   return (
     <div>
       <Nav />
+      {messagedisplay && <SuccessMessage message={successMessage} clearMessage={() => setSuccessMessage(null)} setMessageDisplay={setMessageDisplay}  />}
       <div className="history-container">
         <h5>All Expense</h5>
         <div style={{ textAlign: "center" }} onClick={handleCalender}>
@@ -343,6 +345,8 @@ const Expenselist: React.FC = () => {
             triggerapi={triggerapi}
             setTriggerapi={setTriggerapi}
             roommates={roommate}
+            setSuccessMessage={setSuccessMessage}
+            setMessageDisplay={setMessageDisplay}
           />
         )}
       </Modal>
@@ -360,6 +364,8 @@ const Expenselist: React.FC = () => {
             triggerapi={triggerapi}
             setTriggerapi={setTriggerapi}
             roommates={roommate}
+            setSuccessMessage={setSuccessMessage}
+            setMessageDisplay={setMessageDisplay}
           />
         )}
       </Modal>
@@ -377,6 +383,8 @@ const Expenselist: React.FC = () => {
             triggerapi={triggerapi}
             setTriggerapi={setTriggerapi}
             roommates={roommate}
+            setSuccessMessage={setSuccessMessage}
+            setMessageDisplay={setMessageDisplay}
           />
         )}
       </Modal>

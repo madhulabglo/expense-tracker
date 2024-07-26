@@ -63,8 +63,8 @@ export const fetchRoomMatesWithoutPagination = () => {
         throw new Error("Network response was not ok");
       }
       const allRoomMates = await response.json();
-
       dispatch(fetchRoomMatesSuccess(allRoomMates));
+      return allRoomMates
     } catch (error) {
       // Type assertion to specify that error is an instance of Error
       dispatch(fetchRoomMatesFailure((error as Error).message));
@@ -109,8 +109,8 @@ export const fetchRoomMatesWithPagination = (page: number, limit: number) => {
         throw new Error("Network response was not ok");
       }
       const roomMates = await response.json();
-
       dispatch(fetchRoomMatesPaginationSuccess(roomMates));
+      return roomMates
     } catch (error) {
       // Type assertion to specify that error is an instance of Error
       dispatch(fetchRoomMatesPaginationFailure((error as Error).message));
@@ -151,7 +151,6 @@ export const postRoomMates = (roomMateData: RoomMates) => {
       }
       const allexpense: roomMatesPostResponse = await response.json();
       dispatch(roomMatesPostSuccess(allexpense));
-      console.log(allexpense,"rommm api");
       
       return allexpense; // Ensure the response data is returned
     } catch (error) {

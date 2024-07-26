@@ -10,6 +10,8 @@ const AddRoomMates: React.FC<roomMatesAddProps> = ({
   // list,
   triggerapi,
   setTriggerapi,
+  setSuccessMessage,
+  setMessageDisplay
 }) => {
   const [addExpenseData, setAddExpenseData] = useState<RoomMates>({
     name: "",
@@ -32,8 +34,10 @@ const AddRoomMates: React.FC<roomMatesAddProps> = ({
     e.preventDefault();
     setLoading(true);
     try {
-      await dispatch(postRoomMates(addExpenseData));
+     const response =  await dispatch(postRoomMates(addExpenseData));
       setModal((prev) => ({ ...prev, add: false })); // Close the modal
+      setSuccessMessage(response?.success)
+      setMessageDisplay(true)
       setTriggerapi(!triggerapi); // Trigger the fetch action
     } catch (error) {
       console.error("Failed to add expense:", error);

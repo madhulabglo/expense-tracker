@@ -1,3 +1,4 @@
+import React from "react";
 
 export interface RoomMates {
     name:string
@@ -34,6 +35,8 @@ export interface onlyRoomMates {
     // setList: React.Dispatch<React.SetStateAction<ExpenseResponse>>;
     triggerapi: boolean;
     setTriggerapi: React.Dispatch<React.SetStateAction<boolean>>;
+    setSuccessMessage:React.Dispatch<React.SetStateAction<string|null|undefined>>
+    setMessageDisplay:React.Dispatch<React.SetStateAction<boolean>>
   }
   
   export interface roomMatesAddProps {
@@ -44,4 +47,6 @@ export interface onlyRoomMates {
     // setList: React.Dispatch<React.SetStateAction<ExpenseResponse>>;
     triggerapi: boolean;
     setTriggerapi: React.Dispatch<React.SetStateAction<boolean>>;
+    setSuccessMessage:React.Dispatch<React.SetStateAction<string|null|undefined>>
+    setMessageDisplay:React.Dispatch<React.SetStateAction<boolean>>
   }

@@ -1,3 +1,5 @@
+import React from "react";
+
 // Define a type for the form data which doesn't include `_id`
 export interface Roommate {
   _id: string;
@@ -73,6 +75,8 @@ export interface onlyExpenseEditProps {
   triggerapi: boolean;
   setTriggerapi: React.Dispatch<React.SetStateAction<boolean>>;
   roommates:Roommate[];
+  setSuccessMessage : React.Dispatch<React.SetStateAction<string | null | undefined>>
+  setMessageDisplay : React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface onlyExpenseAddProps {
@@ -84,6 +88,8 @@ export interface onlyExpenseAddProps {
   triggerapi: boolean;
   setTriggerapi: React.Dispatch<React.SetStateAction<boolean>>;
   roommates:  Roommate[] ;
+  setSuccessMessage : React.Dispatch<React.SetStateAction<string | null | undefined>>
+  setMessageDisplay : React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface onlyExpenseCalenderProps {

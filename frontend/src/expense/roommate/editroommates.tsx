@@ -11,6 +11,8 @@ const RoomMatesEdit: React.FC<roomMateseEditProps> = ({
   // setList,
   triggerapi,
   setTriggerapi,
+  setSuccessMessage,
+  setMessageDisplay
 }) => {
   const localstorage_data = JSON.parse(localStorage.getItem("data") as string);
   const [editExpense, setEditExpense] = useState<onlyRoomMates>(roomMates);
@@ -32,8 +34,10 @@ const RoomMatesEdit: React.FC<roomMateseEditProps> = ({
     e.preventDefault();
     setLoading(true);
     try {
-      await dispatch(patchRoomMates(editExpense, roomMates?._id));
+      const response = await dispatch(patchRoomMates(editExpense, roomMates?._id));
       setModal((prev) => ({ ...prev, edit: false })); // Close the modal
+      setSuccessMessage(response?.success)
+      setMessageDisplay(true)
       setTriggerapi(!triggerapi); // Trigger the fetch action
     } catch (error) {
       console.error("Failed to add expense:", error);

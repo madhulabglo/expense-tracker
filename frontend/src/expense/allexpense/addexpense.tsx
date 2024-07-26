@@ -11,6 +11,8 @@ const AddExpense: React.FC<AddExpenseProps> = ({
   // list,
   triggerapi,
   setTriggerapi,
+  setSuccessMessage,
+  setMessageDisplay
 }) => {
 
   const dispatch = useAppDispatch()
@@ -63,9 +65,13 @@ const AddExpense: React.FC<AddExpenseProps> = ({
     e.preventDefault();
     setLoading(true);
     try {
-      await dispatch(postExpense(addExpenseData));
+     const response =  await dispatch(postExpense(addExpenseData));
+     console.log(response,response?.success,"response in expense add");
+     
       setModal((prev) => ({ ...prev, add: false })); // Close the modal
+      setSuccessMessage(response?.success)
       setTriggerapi(!triggerapi); // Trigger the fetch action
+      setMessageDisplay(true)
     } catch (error) {
       console.error("Failed to add expense:", error);
     } finally {

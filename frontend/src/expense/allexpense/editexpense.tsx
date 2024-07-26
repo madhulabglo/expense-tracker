@@ -10,6 +10,9 @@ const EditExpense: React.FC<EditExpenseProps> = ({
   // setList,
   triggerapi,
   setTriggerapi,
+  setSuccessMessage,
+  setMessageDisplay
+
 }) => {
   const dispatch = useAppDispatch()
   const [editExpense, setEditExpense] = useState<Expense>(expense);
@@ -52,9 +55,13 @@ const EditExpense: React.FC<EditExpenseProps> = ({
     e.preventDefault();
     setLoading(true);
     try {
-      await dispatch(patchExpense(editExpense, expense?._id));
-      setModal((prev) => ({ ...prev, edit: false })); // Close the modal
-      setTriggerapi(!triggerapi); // Trigger the fetch action
+     const response =  await dispatch(patchExpense(editExpense, expense?._id));
+     console.log(response,"ress in edit");
+     
+      setModal((prev) => ({ ...prev, edit: false }));
+      setSuccessMessage(response?.success) 
+      setMessageDisplay(true)
+      setTriggerapi(!triggerapi);
     } catch (error) {
       console.error("Failed to add expense:", error);
     } finally {
