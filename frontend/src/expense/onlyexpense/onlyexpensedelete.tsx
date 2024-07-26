@@ -9,6 +9,8 @@ const OnlyExpensDelete: React.FC<onlyExpenseEditProps> = ({
   setModal,
   triggerapi,
   setTriggerapi,
+  setSuccessMessage,
+  setMessageDisplay
 }) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
@@ -20,8 +22,10 @@ const OnlyExpensDelete: React.FC<onlyExpenseEditProps> = ({
   const handleYes = async () => {
     setLoading(true);
     try {
-      await dispatch(deleteOnlyExpense(expense?._id));
+      const response =await dispatch(deleteOnlyExpense(expense?._id));
       setModal((prev) => ({ ...prev, delete: false })); // Close the modal
+      setSuccessMessage(response?.success)
+      setMessageDisplay(true)
       setTriggerapi(!triggerapi); // Trigger the fetch action
     } catch (error) {
       console.error("Failed to add expense:", error);

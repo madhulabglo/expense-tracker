@@ -3,7 +3,6 @@ import { CALCULATION_FAILURE, CALCULATION_REQUEST, CALCULATION_SUCCESS } from ".
 import { calculationResponse } from "../../types/onlyexpenseTypes";
 import { HTTP } from "../../api/baseurl";
 
-
 // const baseURL = "http://127.0.0.1:4000";
 
 const localstorage_data = JSON.parse(localStorage.getItem("data") as string);
@@ -39,8 +38,8 @@ export const getCalculation = (fromdate:string,todate:string,name:string,split:s
             throw new Error("Network response was not ok");
           }
           const allexpense = await response.json();
-    
           dispatch(fetchCalculationSuccess(allexpense));
+          return allexpense
         } catch (error) {
           // Type assertion to specify that error is an instance of Error
           dispatch(fetchCalculationFailure((error as Error).message));

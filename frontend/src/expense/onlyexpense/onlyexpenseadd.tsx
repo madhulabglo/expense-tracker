@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks/storehooks";
+import React, { useState } from "react";
+import { useAppDispatch } from "../../redux/hooks/storehooks";
 import { postOnlyExpense } from "../../redux/actions/onlyexpenseactions";
 import { FormData, onlyExpenseAddProps } from "../../types/onlyexpenseTypes";
 
@@ -10,9 +10,10 @@ const OnlyExpenseAdd: React.FC<onlyExpenseAddProps > = ({
   setModal,
   triggerapi,
   setTriggerapi,
-  roommates
+  roommates,
+  setSuccessMessage,
+  setMessageDisplay
 }) => {
-  console.log(roommates,"addfkdskfljdskfajkfd");
   
   const [addExpenseData, setAddExpenseData] = useState<FormData>({
     name: "",
@@ -31,7 +32,6 @@ const OnlyExpenseAdd: React.FC<onlyExpenseAddProps > = ({
     const { name, value } = e.target;
     setAddExpenseData((prev) => ({ ...prev, [name]: value }));
   };
-  console.log(addExpenseData,"addin oneley");
   
 
   const handleMoreFieldsChange = (
@@ -68,8 +68,10 @@ const OnlyExpenseAdd: React.FC<onlyExpenseAddProps > = ({
     e.preventDefault();
     setLoading(true);
     try {
-      await dispatch(postOnlyExpense(addExpenseData));
-      setModal((prev) => ({ ...prev, add: false })); // Close the modal
+      const response = await dispatch(postOnlyExpense(addExpenseData));
+      setModal((prev) => ({ ...prev, add: false })); 
+      setSuccessMessage(response?.success)
+      setMessageDisplay(true)
       setTriggerapi(!triggerapi); // Trigger the fetch action
     } catch (error) {
       console.error("Failed to add expense:", error);

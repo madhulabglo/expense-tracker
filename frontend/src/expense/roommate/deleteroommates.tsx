@@ -9,6 +9,8 @@ const RoomMatesDelete: React.FC<roomMateseEditProps> = ({
   setModal,
   triggerapi,
   setTriggerapi,
+  setSuccessMessage,
+  setMessageDisplay
 }) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
@@ -20,8 +22,10 @@ const RoomMatesDelete: React.FC<roomMateseEditProps> = ({
   const handleYes = async () => {
     setLoading(true);
     try {
-      await dispatch(deleteRoomMates(roomMates?._id));
+      const response = await dispatch(deleteRoomMates(roomMates?._id));
       setModal((prev) => ({ ...prev, delete: false })); // Close the modal
+      setSuccessMessage(response?.success)
+      setMessageDisplay(true)
       setTriggerapi(!triggerapi); // Trigger the fetch action
     } catch (error) {
       console.error("Failed to add expense:", error);

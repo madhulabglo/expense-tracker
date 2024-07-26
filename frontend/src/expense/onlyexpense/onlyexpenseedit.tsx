@@ -15,12 +15,12 @@ const OnlyExpenseEdit: React.FC<onlyExpenseEditProps> = ({
   triggerapi,
   setTriggerapi,
   roommates,
+  setSuccessMessage,
+  setMessageDisplay
 }) => {
   const [editExpense, setEditExpense] = useState<onlyExpense>(expense);
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
-
-  console.log(editExpense, "editExpense");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -67,8 +67,10 @@ const OnlyExpenseEdit: React.FC<onlyExpenseEditProps> = ({
     e.preventDefault();
     setLoading(true);
     try {
-      await dispatch(patchOnlyExpense(editExpense, expense?._id));
+      const response = await dispatch(patchOnlyExpense(editExpense, expense?._id));
       setModal((prev) => ({ ...prev, edit: false })); // Close the modal
+      setSuccessMessage(response?.success)
+      setMessageDisplay(true)
       setTriggerapi(!triggerapi); // Trigger the fetch action
     } catch (error) {
       console.error("Failed to add expense:", error);

@@ -1,19 +1,33 @@
-import React from "react";
-import { Alert } from "react-bootstrap";
+import React, { useEffect } from "react";
 
-const SuccessMessage: React.FC = () => {
+interface SuccessMessageProps {
+  message: string | null | undefined;
+  clearMessage: () => void;
+  setMessageDisplay: React.Dispatch<React.SetStateAction<boolean>>; 
+}
 
-    // setTimeout(() => setSuccessMessage(null), 10000);
+const SuccessMessage: React.FC<SuccessMessageProps> = ({
+  message,
+  clearMessage,
+  setMessageDisplay
+}) => {
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => {
+        clearMessage();
+        setMessageDisplay(false); // Set this after clearing the message
+      }, 5000); // Hide after 5 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [message, clearMessage, setMessageDisplay]);
+
+  if (!message) return null; 
+
   return (
-    <div>
-      {/* <Alert
-        variant="success"
-        onClose={() => setSuccessMessage(null)}
-        dismissible
-      >
-        {successMessage}
-      </Alert> */}
+    <div className="alert alert-success" role="alert" style={{ marginTop: "10%" }}>
+      {message}
     </div>
   );
 };
+
 export default SuccessMessage;

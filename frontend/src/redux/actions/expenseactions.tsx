@@ -70,6 +70,7 @@ export const fetchExpenseWithoutPagination = () => {
       }
       const allexpense = await response.json();
       dispatch(fetchExpenseSuccess(allexpense));
+      return allexpense
     } catch (error) {
       // Type assertion to specify that error is an instance of Error
       dispatch(fetchExpenseFailure((error as Error).message));
@@ -119,6 +120,7 @@ export const fetchExpenseWithPagination = (
       }
       const allexpense = await response.json();
       dispatch(fetchPaginationExpenseSuccess(allexpense));
+      return allexpense
     } catch (error) {
       // Type assertion to specify that error is an instance of Error
       dispatch(fetchPaginationExpenseFailure((error as Error).message));
@@ -159,7 +161,9 @@ export const postExpense = (expensedata: ExpenseFormData) => {
         throw new Error("Network response was not ok");
       }
       const allexpense = await response.json();
+      console.log(allexpense,"expense post data");
       dispatch(expensePostSuccess(allexpense));
+      return allexpense
     } catch (error) {
       // Type assertion to specify that error is an instance of Error
       dispatch(expensePostFailure((error as Error).message));
@@ -201,6 +205,7 @@ export const patchExpense = (expensedata: Expense, id: string) => {
       }
       const allexpense = await response.json();
       dispatch(expensePatchSuccess(allexpense));
+      return allexpense
     } catch (error) {
       // Type assertion to specify that error is an instance of Error
       dispatch(onlyExpensePatchFailure((error as Error).message));
@@ -241,6 +246,7 @@ export const deleteExpense = (id: string) => {
       }
       const allexpense = await response.json();
       dispatch(expenseDeleteSuccess(allexpense));
+      return allexpense
     } catch (error) {
       // Type assertion to specify that error is an instance of Error
       dispatch(expenseDeleteFailure((error as Error).message));
@@ -281,6 +287,7 @@ export const postEmailAddress = (logindata: any) => {
       }
       const allexpense = await response.json();
       dispatch(postEmailSuccess(allexpense));
+      return allexpense
     } catch (error) {
       // Type assertion to specify that error is an instance of Error
       dispatch(PostEmailFailure((error as Error).message));
@@ -323,6 +330,7 @@ export const postOtpVerification = (loginData: any) => {
 
       const otpdata = await response.json();
       dispatch(postOtpSuccess(otpdata));
+      return otpdata
     } catch (error) {
       dispatch(postOtpFailure(error));
     }
