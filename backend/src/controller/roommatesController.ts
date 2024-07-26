@@ -15,7 +15,7 @@ export const addRoommates = async (req: Request, res: Response) => {
       .json({ data: new_expense, success: "New data added successfully" });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "data doesn't posted" });
+    res.status(500).json({ message: "An error occurred while adding the roommates. Please try again later." });
   }
 };
 
@@ -30,7 +30,7 @@ export const getRoommatesWithoutPagination = async (
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "data doesn't get" });
+    res.status(500).json({ message: "An error occurred while getting the roommates. Please try again later." });
   }
 };
 
@@ -50,7 +50,6 @@ export const getRoommates = async (req: Request, res: Response) => {
       RoomMates.countDocuments({}), // Assuming you have a Mongoose schema named RoomMates
     ]);
 
-    // 4. Send the paginated results with additional information
     res.status(200).json({
       results: paginatedExpenses,
       page,
@@ -60,7 +59,7 @@ export const getRoommates = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Data retrieval failed" });
+    res.status(500).json({ message: "An error occurred while getting the roommates. Please try again later." });
   }
 };
 
@@ -68,7 +67,6 @@ export const updateRoommates = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
 
-    // Find the document by ID and update it with the provided data
     const updatedExpense = await RoomMates.findByIdAndUpdate(id, req.body, {
       new: true,
       runValidators: true,
@@ -77,15 +75,13 @@ export const updateRoommates = async (req: Request, res: Response) => {
     if (!updatedExpense) {
       return res.status(404).json({ message: "Roommate not found" });
     }
-
-    // Send the updated document as the response
     res.status(200).json({
       data: updatedExpense,
       success: "Roommate name updated succesfully",
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Data didn't update" });
+    res.status(500).json({ message: "An error occurred while updating the roommates. Please try again later." });
   }
 };
 
@@ -100,6 +96,6 @@ export const deleteRoommate = async (req: Request, res: Response) => {
     res.status(200).json({ success: "Room mate deleted succesfully" });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "data doesn't delete" });
+    res.status(500).json({ message: "An error occurred while deleting the roommates. Please try again later." });
   }
 };

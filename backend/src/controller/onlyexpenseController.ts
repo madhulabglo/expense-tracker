@@ -25,7 +25,7 @@ export const addonlyexpense = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "data doesn't posted" });
+    res.status(500).json({ message: "An error occurred while addting the expense. Please try again later." });
   }
 };
 
@@ -47,7 +47,7 @@ export const onlyexpenselistWithoutPagination = async (
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "data doesn't get" });
+    res.status(500).json({ message: "An error occurred while getting the expense. Please try again later." });
   }
 };
 
@@ -105,7 +105,7 @@ export const onlyExpenselistWithPagination = async (
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "data doesn't get" });
+    res.status(500).json({ message: "An error occurred while getting the expense. Please try again later." });
   }
 };
 
@@ -215,8 +215,7 @@ export const onlyExpenseUpdate = async (req: Request, res: Response) => {
       .json({ data: updatedExpense, success: "Expense updated succesfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Data didn't update" });
-  }
+    res.status(500).json({ message: "An error occurred while updating the expense. Please try again later." });  }
 };
 
 export const onlyExpenseDelete = async (req: Request, res: Response) => {
@@ -230,6 +229,5 @@ export const onlyExpenseDelete = async (req: Request, res: Response) => {
     res.status(200).json({ success: "Expense deleted succesfully" });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "data doesn't delete" });
-  }
+    res.status(500).json({ message: "An error occurred while deleting the expense. Please try again later." });  }
 };

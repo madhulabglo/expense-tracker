@@ -1,1 +1,0 @@
-{"version":3,"file":"loginRouter.js","sourceRoot":"","sources":["../../src/router/loginRouter.ts"],"names":[],"mappings":";;AAAA,qCAAgC;AAChC,mEAA+D;AAE/D,MAAM,MAAM,GAAW,IAAA,gBAAM,GAAE,CAAA;AAE/B,MAAM,CAAC,IAAI,CAAC,QAAQ,EAAE,wBAAM,CAAC,CAAA;AAC7B,MAAM,CAAC,IAAI,CAAC,YAAY,EAAC,2BAAS,CAAC,CAAA;AAGnC,kBAAe,MAAM,CAAA"}
