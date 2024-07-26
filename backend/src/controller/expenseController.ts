@@ -22,7 +22,7 @@ export const addExpense = async (req: Request, res: Response) => {
       .json({ data: new_expense, success: "New data added successfully" });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "data doesn't posted" });
+    res.status(500).json({ message: "An error occurred while adding the expense. Please try again later." });
   }
 };
 
@@ -59,7 +59,7 @@ export const getExpenseWithoutPagination = async (
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "data doesn't get" });
+    res.status(500).json({ message: "An error occurred while getting the expense. Please try again later." });
   }
 };
 
@@ -125,7 +125,7 @@ export const getExpense = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Data retrieval failed" });
+    res.status(500).json({ message: "An error occurred while getting the expense. Please try again later." });
   }
 };
 
@@ -149,7 +149,7 @@ export const updateExpense = async (req: Request, res: Response) => {
       .json({ data: updatedExpense, success: "Expense updated succesfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Data didn't update" });
+    res.status(500).json({ message: "An error occurred while updating the expense. Please try again later." });
   }
 };
 
@@ -164,6 +164,6 @@ export const deleteExpense = async (req: Request, res: Response) => {
     res.status(200).json({ success: "Expense deleted succesfully" });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "data doesn't delete" });
+    res.status(500).json({ message: "An error occurred while deleting the expense. Please try again later." });
   }
 };
