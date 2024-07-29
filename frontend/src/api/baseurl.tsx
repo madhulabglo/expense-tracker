@@ -1,7 +1,7 @@
 // import axios from "axios";
 
-const mode = "dev";
-// const mode = "prod";
+// const mode = "dev";
+const mode = "prod";
 
 const baseValues = {
   baseprotocal: {
